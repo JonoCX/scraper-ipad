@@ -1,6 +1,6 @@
 #! /Users/jonathan/anaconda/bin/python
 import smtplib
-from time import sleep, gmtime, strftime
+from time import sleep, ctime
 from urllib2 import urlopen
 from bs4 import BeautifulSoup
 
@@ -16,16 +16,16 @@ class Scraper:
             added = False
             for i in bs_obj.findAll("h3"):
                 for j in i.find("a"):
-                    print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " : " + j)
+                    print(ctime() + " : " + j)
                     if "64GB - Space Grey" in j:
                         added = True
                         break
 
             if added:
-                print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " : " + " Found!")
+                print(ctime() + " : " + " Found!")
                 self.send_email()
             else:
-                print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " : " + " Sleeping!")
+                print(ctime() + " : " + " Sleeping!")
                 sleep(300)
 
     @staticmethod
